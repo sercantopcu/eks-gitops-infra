@@ -1,1 +1,1 @@
-# eks-gitops-observability-lab
+# eks-gitops-infra
