@@ -16,3 +16,6 @@ prometheus:
 
 alertmanager:
   enabled: false
+
+crds:
+  enabled: false
