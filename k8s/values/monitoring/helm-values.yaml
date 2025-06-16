@@ -1,0 +1,18 @@
+grafana:
+  service:
+    type: LoadBalancer
+
+  adminPassword: admin
+
+  dashboards:
+    default:
+      kubernetes:
+        gnetId: 315
+        datasource: Prometheus
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+
+alertmanager:
+  enabled: false
