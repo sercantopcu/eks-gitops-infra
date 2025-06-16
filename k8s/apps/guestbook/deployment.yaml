@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: guestbook
-          image: gcr.io/google-samples/guestbook:v3
+          image: k8s.gcr.io/echoserver:1.10
           ports:
             - containerPort: 3000
