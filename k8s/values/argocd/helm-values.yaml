@@ -1,0 +1,30 @@
+server:
+  service:
+    type: LoadBalancer
+    selector:
+      app.kubernetes.io/name: argocd-server
+    ports:
+      - name: https
+        port: 443
+        targetPort: 8080
+      - name: http
+        port: 80
+        targetPort: 8080
+  containerPort: 8080
+  ingress:
+    enabled: false
+  livenessProbe:
+    httpGet:
+      path: /
+      port: 8080
+  readinessProbe:
+    httpGet:
+      path: /
+      port: 8080
+
+configs:
+  params:
+    server.insecure: true
+
+applicationSet:
+  enabled: true
