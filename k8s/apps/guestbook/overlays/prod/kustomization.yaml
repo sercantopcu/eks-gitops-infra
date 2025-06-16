@@ -3,3 +3,5 @@ kind: Kustomization
 namePrefix: prod-
 resources:
   - ../../base
+patchesStrategicMerge:
+  - replica-patch.yaml
