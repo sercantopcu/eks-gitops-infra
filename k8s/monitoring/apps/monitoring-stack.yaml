@@ -6,12 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/sercantopcu/eks-gitops-infra
-    targetRevision: HEAD
-    path: k8s/monitoring/install
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 56.7.0 # or the version you prefer
     helm:
       valueFiles:
-        - helm-values.yaml
+        - https://raw.githubusercontent.com/sercantopcu/eks-gitops-infra/HEAD/k8s/monitoring/install/helm-values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
