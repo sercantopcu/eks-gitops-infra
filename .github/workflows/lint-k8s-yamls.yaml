@@ -6,7 +6,7 @@ on:
       - 'k8s/**.yaml'
       - '.github/workflows/lint-k8s-yamls.yaml'
   push:
-    branches: [main]
+    branches: [master]
 
 jobs:
   lint:
