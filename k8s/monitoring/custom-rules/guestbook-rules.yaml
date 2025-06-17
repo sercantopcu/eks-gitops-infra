@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: guestbook-rules
+  namespace: monitoring
+  labels:
+    release: monitoring-stack  # important for Prometheus to pick it up
+spec:
+  groups:
+    - name: guestbook.rules
+      rules:
+        - alert: GuestbookPodHighRestarts
+          expr: increase(kube_pod_container_status_restarts_total{namespace="guestbook"}[5m]) > 3
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Guestbook pod has restarted more than 3 times in 5 minutes"
+            description: "Pod {{ $labels.pod }} in namespace guestbook is restarting frequently."

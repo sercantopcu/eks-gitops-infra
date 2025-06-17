@@ -21,7 +21,28 @@ prometheus:
     serviceMonitorSelectorNilUsesHelmValues: false
 
 alertmanager:
-  enabled: false
+  enabled: true  # ✅ Keep this true to ensure Alertmanager is deployed
+
+  config:
+    global:
+      smtp_smarthost: 'smtp.gmail.com:587'  # ✅ Keep, or replace with your SMTP host
+      smtp_from: 'your-alerts@gmail.com'    # 🔁 Replace with the email address you're sending FROM
+      smtp_auth_username: 'your-alerts@gmail.com'  # 🔁 Replace with same email as above
+      smtp_auth_password: 'your-app-password'      # 🔁 REPLACE with a valid Gmail App Password (not your login password)
+                                                   # ⚠️ DON'T commit real passwords. Use Secret if needed.
+
+    route:  # ✅ This is the routing rule for alerts
+      receiver: email-notifications        # ✅ Name of the receiver below
+      group_by: ['alertname']              # ✅ Optional: group alerts by label (useful to batch notifications)
+      group_wait: 30s                      # ✅ Wait time before sending the first alert group
+      group_interval: 5m                   # ✅ Time between sending updates for the same group
+      repeat_interval: 3h                  # ✅ Time to wait before re-sending a resolved alert
+
+    receivers:
+      - name: email-notifications            # ✅ This name should match the one in `route.receiver`
+        email_configs:
+          - to: 'your-recipient@example.com'  # 🔁 Replace with the email that will receive alerts
+            send_resolved: true               # ✅ Send notifications when an alert is resolved
 
 crds:
   enabled: false
