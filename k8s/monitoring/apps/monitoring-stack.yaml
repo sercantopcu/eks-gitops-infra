@@ -11,7 +11,7 @@ spec:
     targetRevision: 56.7.0
     helm:
       valueFiles:
-        - ../../values/helm-values.yaml
+        - ../values/helm-values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
